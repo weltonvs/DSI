@@ -84,47 +84,52 @@ Descripción de los aspectos de la organización que tienen impacto y/o se ven a
 	\caption{\label{fig:diagramaEstructura}Diagrama estructura - Formulario OM2}
 \end{figure}
 
-
-
-\section{Formulario OM-3: descomposición del proceso de negocio.}
+\section{Formulario OM-3: Descomposición del Proceso de Negocio.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Descripción del proceso de interés a partir de las tareas que lo componen.
 
 \begin{table}[H]
-\scriptsize
-\begin{tabularx}{\textwidth}{|p{0.2cm}|>{\raggedright}X|>{\raggedright}X|>{\raggedright}X|>{\raggedright}X|>{\raggedright}X|>{\PBS\raggedright}X|} \hline
-\multicolumn{3}{|l}{\textbf{Modelo de Organización}} &
-\multicolumn{4}{|l|}{\textbf{Formulario OM-3: Descomposición de
-los Procesos}}\\ \hline\hline \textsc{N\textordmasculine} &
-\textsc{Tarea} &  \textsc{Realiza\-da por} &  \textsc{¿Dónde?} &
-\textsc{Recursos de Conocimiento} & \textsc{¿In\-ten\-si\-va en
-Conocimiento?} & \textsc{Im\-por\-tan\-cia} \\
-\hline Id. & Nombre \emph{(partes de los procesos descritos en OM-2)}& Agente
-humano/ soft\-wa\-re \emph{(per\-so\-nal/re\-cur\-sos de OM-2)} &
-Localización en la estructura \emph{(\textit{véase} OM-2)} & Nombre \emph{(Se
-detalla en OM-4)} & (sí o no) & \emph{(usando un criterio definido
-por el Ingeniero de Conocimiento, por ejemplo escala 1--5)} \\ \hline
-\end{tabularx}
-\label{tab.OM3}
+  \centering
+  \resizebox{17,5cm}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \multicolumn{3}{|c}{\textbf{Modelo de Organización}} & \multicolumn{4}{|c|}{\textbf{Formulario OM-3: Descomposición de los Procesos}}\\
+      \hline \hline
+      \textsc{N\textordmasculine} & \textsc{Tarea} & \textsc{Realiza\-da por} & \textsc{¿Dónde?} & \textsc{Recursos de Conocimiento} & \textsc {¿In\-ten\-si\-va en Conocimiento?} & \textsc{Im\-por\-tan\-cia} \\
+      \hline
+      1 & Introducir datos gestión & \multicolumn{1}{|p{6.0cm}|}{\centering Usuario de Especulador Experto} & En el PC del Usuario & \multicolumn{1}{|p{6.0cm}|}{\centering Experiencia por parte del usuario} & Sí (moderado) & Alta \\
+      \hline
+      2 & Operación Comprar & \multicolumn{1}{|p{6.0cm}|}{\centering Software Especulador Experto (con su sistema inteligente de predicción)}& En PC del usuario & Experiencia de compra de activos & Sí (elevado) & Máxima \\
+      \hline
+      3 & Operación Vender & \multicolumn{1}{|p{6.0cm}|}{\centering Software Especulador Experto (con su sistema inteligente de predicción)} & En PC del usuario & Experiencia de venda de activos & Sí (elevado) & Máxima \\
+      \hline
+      4 & \multicolumn{1}{|p{6.0cm}|}{\centering Prueba mediante simulación de inversión} & \multicolumn{1}{|p{6.0cm}|}{\centering Dept. de prubas con el Especulador Experto} & En el laboratorio de pruebas & No & No & Alta \\
+      \hline
+    \end{tabular}
+  }
+	\caption{\label{tab:OM3}Descomposición del proceso de negocio - OM3}
 \end{table}
 
-\section{Formulario OM-4: activos de conocimiento.}
+\section{Formulario OM-4: Activos de Conocimiento}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Descripción del componente \textit{conocimiento} del modelo de la organización.
 
 \begin{table}[H]
-\scriptsize
-\begin{tabularx}{\textwidth}{|p{1.3cm}|p{1.3cm}|p{1.3cm}|X|X|X|X|} \hline
-\multicolumn{3}{|l}{\textbf{Modelo de Organización}} & \multicolumn{4}{|l|}{\textbf{Formulario OM-4: Activos de Conocimiento}} \\ \hline\hline
-\textsc{Recurso de Conocimiento} & \textsc{Pertenece a} &  \textsc{Usado en} &  \textsc{¿Forma
-Correcta?} & \textsc{¿Lugar Correcto?} & \textsc{¿Tiempo Correcto?} & \textsc{¿Calidad Correcta?}\\ \hline
-Nombre \emph{(\textit{véase} OM-3)} & Agente \emph{(\textit{véase} OM-3)}& Tarea \emph{(\textit{véase} OM-3)}& (si o no; comentario)&
-(si o no; comentario)& (si o no; comentario)& (si o no; comentario)\\ \hline
-\end{tabularx}
-
-  \label{tab.OM4}
+  \centering
+  \resizebox{17,5cm}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \multicolumn{3}{|c}{\textbf{Modelo de Organización}} & \multicolumn{4}{|c|}{\textbf{Formulario OM-4: Activos de Conocimiento}}\\
+      \hline \hline
+      \textsc{Recurso de Conocimiento} & \textsc{Pertenece} & \textsc{Usado en} & \textsc{¿Forma Cor\-recta?} & \textsc{¿Lugar Cor\-recto?} & \textsc {¿Tiempo Cor\-recto?} & \textsc{¿Calidad Cor\-recta?} \\
+      \hline
+      \multicolumn{1}{|p{6.0cm}|}{\centering Experiencia en especulación de activos financieros} & \multicolumn{1}{|p{6.0cm}|}{\centering Expertos en especulación en mercados de activos} & \multicolumn{1}{|p{6.0cm}|}{\centering Tareas 2 y 3 de OM-3} & \multicolumn{1}{|p{6.0cm}|}{\centering No, reside en el experto} & - & - & \multicolumn{1}{|p{6.0cm}|}{\centering Sí, teniendo en cuenta que son aproximaciones (no se puede determinar siempre un resultado ganador)} \\
+      \hline
+    \end{tabular}
+  }
+	\caption{\label{tab:OM4}Activos de conocimiento - OM4}
 \end{table}
  
 
