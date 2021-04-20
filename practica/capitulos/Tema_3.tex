@@ -79,7 +79,7 @@ Para este proyecto hemos decidido utilizar la metodología ``middle-out'' con la
 
 \subsection{Plantilla anotada}
 
-La plantilla que mas se adapta a nuestro problema es la de diagnóstico, como se muestra en la Figura \ref{fig:PlantillaEjemplo}. Con una pequeña modificación que se muestras en la Figuras \ref{fig:CasoMoverRiesgo} y \ref{fig:CasoCerrarOrden}.
+La plantilla que mas se adapta a nuestro problema es la de diagnóstico, como se muestra en la Figura \ref{fig:PlantillaEjemplo}. Con una pequeña modificación que se muestras en la Figuras \ref{fig:PlantillaDiagnosticoModificada}.
 
 \begin{figure}[H]
   \centering
@@ -89,21 +89,27 @@ La plantilla que mas se adapta a nuestro problema es la de diagnóstico, como se
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.50]{imagenes/CasoMoverRiesgo.png}
-  \caption{\label{fig:CasoMoverRiesgo}Ejemplo de la plantilla caso de ajustar riesgo}
+  \includegraphics[scale=2.10]{imagenes/PlantillaDiagnosticoModificada.png}
+  \caption{\label{fig:PlantillaDiagnosticoModificada}Ejemplo de la plantilla diagnóstico modificada}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.50]{imagenes/CasoCerrarOrden.png}
-  \caption{\label{fig:CasoCerrarOrden}Ejemplo de la plantilla con el caso cerrar orden}
-\end{figure}
+\subsubsection{Anotaciones}
+Comentarios y ejemplos concretos para los roles presentes en la plantilla seleccionada.
+\begin{itemize}
+  \item \textbf{Caso:} Datos de una operativa: e.g. En la situación que se muestra en la Figura \ref{fig:Situacion1}, donde el inversor había ejecutado una orden de compra en el precio \textbf{1.18767} y ha estipulado su gestión de riesgo para el precio \textbf{1.18664} y como se observa en el gráfico de la figura comentada anteriormente, el precio esta a favor del inversor y en esa ocasión el inversor tiene que reducir el riesgo inicial de la inversión una vez superada la resistencia.
+  \item \textbf{Caso abstraído:} Datos de una operativa abstaídos. e.g. El precio del activo ha superado la resistencia, es decir, MercadoForex.Activo.valor > resistencia. Se abstrae en MercadoForex.Activo.valor > MercadoForex.resistencia.Fuerte
+  \item \textbf{Hypothesis\footnote{Hypothesis (Diferential)}:} Posibles acciones a llevar a cabo e.g. Cerrar la operativa o reducir el riesgo.
+  \item \textbf{Hypothesis\footnote{Hypothesis (Hypothesis)}:} Acción concreta a evaluar. e.g. reducir el riesgo.
+  \item \textbf{Observable:} Estado del mercado de forex para la operativa actual. e.g. Mercado forex para EURUSD.
+  \item \textbf{Finding:} Estado del mercado con respecto a nuestra operativa: e.g. Si estamos comprando que la tendencia sea alcista o si estamos vendiendo bajista.
+  \item \textbf{Result:} Se confirma o deniega la hipotesis seleccionada. e.g. \{Ajustar riesgo = True, Cerrar la operativa = False\} 
+\end{itemize}
 
 \subsection{Esquema inicial del dominio}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.70]{imagenes/DominioInicial.png}
+  \includegraphics[scale=0.90]{imagenes/DominioInicial.png}
   \caption{\label{fig:DominioInicial}Dominio inicial}
 \end{figure}
 
@@ -112,23 +118,28 @@ La plantilla que mas se adapta a nuestro problema es la de diagnóstico, como se
 \subsubsection{Mapeado}
 Relacción entre los roles de las inferencias de la plantilla con los conceptos de nuestro problema.
 \begin{itemize}
+  \item Abstraído:
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{imagenes/abstraccion.png}
+    \caption{\label{fig:Cover}Ejemplo del mapeo de Abstraccion}
+  \end{figure}
   \item Cover:  
   \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{imagenes/Cover.png}
+    \includegraphics[scale=0.50]{imagenes/cover.png}
     \caption{\label{fig:Cover}Ejemplo del mapeo de Cover}
   \end{figure}
   \item Select: 
   \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{imagenes/Select.png}
+    \includegraphics[scale=0.50]{imagenes/select.png}
     \caption{\label{fig:Select}Ejemplo del mapeo de Select}
   \end{figure}
-  \newpage
   \item Specify: 
   \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{imagenes/Specify.png}
+    \includegraphics[scale=0.50]{imagenes/specify.png}
     \caption{\label{fig:Specify}Ejemplo del mapeo de Specify}
   \end{figure}
   \item Obtain:  
@@ -137,12 +148,16 @@ Relacción entre los roles de las inferencias de la plantilla con los conceptos 
     \includegraphics[scale=0.50]{imagenes/Obtain.png}
     \caption{\label{fig:Obtain}Ejemplo del mapeo de Obtain}
   \end{figure}
-  \newpage
   \item Verify:  
   \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{imagenes/Verify.png}
-    \caption{\label{fig:Verify}Ejemplo del mapeo de Verify}
+    \includegraphics[scale=0.50]{imagenes/verify1.png}
+    \caption{\label{fig:Verify}Ejemplo del mapeo de Verify del rol Diferential}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{imagenes/verify2.png}
+    \caption{\label{fig:verify2}Ejemplo del mapeo de Verify del rol finding}
   \end{figure}
 \end{itemize}
 
