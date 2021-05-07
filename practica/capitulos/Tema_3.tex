@@ -131,7 +131,7 @@ Relacción entre los roles de las inferencias de la plantilla con los conceptos 
   \item Abstraído:
   \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{imagenes/abstraccion_inferencia.png}
+    \includegraphics[scale=0.55]{imagenes/abstraccion_inferencia.png}
     \caption{\label{fig:Cover}Ejemplo del mapeo de Abstraccion}
   \end{figure}
   \item Cover:  
@@ -172,3 +172,128 @@ Relacción entre los roles de las inferencias de la plantilla con los conceptos 
 \end{itemize}
 
 \section{Especificación y método de la tarea}
+
+\subsection{Especificación}
+
+\begin{lstlisting}[style=Python-color, caption={Pseudocódigo de la especificación}]
+  TASK diagnosis;
+  ROLES:
+  INPUT:
+  caso abstraido: "Finding that initiates the diagnostic process";
+  OUTPUT:
+  faults: "the faults that could have caused the complaint";
+  evidence: "the evidence gathered during diagnosis";
+  END TASK diagnosis;
+\end{lstlisting}
+
+\subsection{Método}
+
+\begin{lstlisting}[style=Python-color, caption={Pseudocódigo de Completo}]  
+  TASKMETHOD causalcovering;
+    REALIZES: diagnosis;
+    DECOMPOSITION:
+      INFERENCES: cover, select, specify, verify;
+      TRANSFER-FUNCTIONS: obtain;
+    ROLES:
+      INTERMEDIATE:
+        differential: "active candidate solutions";
+        hypothesis: "candidate solution";
+        result: "boolean indicating result of the test";
+        expected-finding: "data one would normally expect to find";
+        actual-finding: "the data actually observed in practice";
+    CONTROL-STRUCTURE:
+      WHILE NEWSOLUTION cover(complaint -> hypothesis) DO
+        differential := hypothesis ADD differential;
+      END WHILE
+      REPEAT
+          select(differential -> hypothesis);
+          specify(hypothesis -> observable);
+          obtain(observable -> finding);
+          evidence := finding ADD evidence;
+        FOREACH hypothesis IN differential DO
+          verify(hypothesis + evidence -> result);
+          IF result == false
+            THEN differential := differential SUBTRACT hypothesis;
+          END IF
+        END FOREACH
+      UNTIL
+        SIZE differential <= 1 OR "no more observables left";
+      END REPEAT
+    faults := differential;
+  END TASKMETHOD causalcovering;
+\end{lstlisting}
+
+
+\subsection{Base de conocimiento}
+\begin{lstlisting}[style=Python-color, caption={regla-abstraccion}]
+  EXPRESSIONS:
+    MercadoForex.Activo.valor > MercadoForex.Activo.EscenarioActivo.Resistencia
+    AND MercadoForex.Activo.EscenarioActivo.Resistencia = Fuerte
+    CONDICIONA-A
+    accion = Habilidad
+  END KNOWLEDGE-BASE dependencia-estado;
+
+    EXPRESSIONS:
+        escenario.personaje.salud_actual > 0
+        AND Habilidad.usable = True
+        CONDICIONA-A
+        accion = Habilidad
+  END KNOWLEDGE-BASE dependencia-estado;
+\end{lstlisting}
+
+\begin{lstlisting}[style=Python-color, caption={dependencia-estado}]
+  EXPRESSIONS:
+    MercadoForex.Activo.valor > MercadoForex.Activo.EscenarioActivo.Resistencia
+    AND MercadoForex.Activo.EscenarioActivo.Resistencia = Fuerte
+    CONDICIONA-A
+    accion = {Ajustar_Riesgo, Cerrar_Operativa}
+  END KNOWLEDGE-BASE dependencia-estado;
+
+  EXPRESSIONS:
+    MercadoForex.Activo.valor > MercadoForex.Activo.EscenarioActivo.Resistencia
+    AND MercadoForex.Activo.EscenarioActivo.Resistencia = Debil
+      CONDICIONA-A
+      accion = {NoHacerNada}
+  END KNOWLEDGE-BASE dependencia-estado;
+\end{lstlisting}
+
+\begin{lstlisting}[style=Python-color, caption={regla-especificación}]
+  EXPRESSIONS:
+    accion = AjustarRiesgo
+    AND MercadoForex.Activo.EscenarioActivo.Tendencia = alcista
+    RESULTA-EN
+        accion = MercadoForex.Activo.EscenarioActivo.Riesgo.stopLoss = MercadoForex.
+        Activo.EscenarioActivo.Soporte.ultimoValor     
+  END KNOWLEDGE-BASE regla-especificación;
+  
+  EXPRESSIONS:
+    accion = NohacerNada
+    AND MercadoForex.Activo.EscenarioActivo.Tendencia = alcista
+    RESULTA-EN
+        accion = MercadoForex.Activo.EscenarioActivo.Riesgo.stopLoss = MercadoForex.Activo.EscenarioActivo.Riesgo.stopLoss       
+  END KNOWLEDGE-BASE regla-especificación;
+  
+
+\end{lstlisting}
+
+\begin{lstlisting}[style=Python-color, caption={regla-verificación}]
+  EXPRESSIONS:
+    accion.tipo = sanación
+    AND efecto.escenario_actual.personaje.salud_actual > efecto.escenario_anterior.personaje.salud_actual
+    RESULTA-EN
+        acción
+  END KNOWLEDGE-BASE regla-especificación;
+
+  EXPRESSIONS:
+    accion.tipo = sanación
+    AND efecto.escenario_actual.personaje.salud_actual > efecto.escenario_anterior.personaje.salud_actual
+    RESULTA-EN
+        acción
+  END KNOWLEDGE-BASE regla-especificación;
+
+
+\end{lstlisting}
+
+
+
+
